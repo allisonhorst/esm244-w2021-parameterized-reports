@@ -1,8 +1,10 @@
 ---
 title: "Summary report for the `r params$species`"
-output: html_document
+output: 
+  html_document:
+    theme: simplex
 params:
-  species: species
+  species: bear
   
 ---
 
@@ -23,3 +25,22 @@ Basic information about this cute `r animal_subset$species`:
 - Age: `r animal_subset$age` years
 - Diet: `r animal_subset$diet`
 - Color: `r animal_subset$color`
+
+
+```{r, include = FALSE}
+
+# Here, we make a function to render our report *and* save a report with the name of the species in the file name!
+
+# Directly from: https://bookdown.org/yihui/rmarkdown/params-knit.html
+
+render_report = function(species) {
+  rmarkdown::render(
+    input = "animals.Rmd", # What's the input file to render?
+    params = list(species = species), # What are the parameters?
+    output_file = paste0(species, "_report", ".html") # What should I name the output file?
+  )
+}
+
+# Then if we run render_report(species = "pika") in the Console, we'll make a parameterized report for pika! 
+```
+
