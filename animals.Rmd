@@ -1,8 +1,6 @@
 ---
 title: "Summary report for the `r params$species`"
-output: 
-  html_document:
-    theme: simplex
+output: html_document
 params:
   species: bear
   
@@ -28,6 +26,10 @@ Basic information about this cute `r animal_subset$species`:
 
 
 ```{r, include = FALSE}
+
+# Want to render a report for just one species? Try in Console:
+# rmarkdown::render(input = "animals.Rmd", params = list(species = "marmot"), output_file = "marmot.html")
+
 
 # Here, we make a function to render our report *and* save a report with the name of the species in the file name!
 
