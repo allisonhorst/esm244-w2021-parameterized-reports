@@ -1,0 +1,25 @@
+---
+title: "Summary report for the `r params$species`"
+output: html_document
+params:
+  species: species
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+animals <- read_csv("animals.csv")
+```
+
+```{r, echo = FALSE}
+animal_subset <- animals %>% 
+  filter(species == params$species)
+```
+
+Basic information about this cute `r animal_subset$species`: 
+
+- Age: `r animal_subset$age` years
+- Diet: `r animal_subset$diet`
+- Color: `r animal_subset$color`
