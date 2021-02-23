@@ -35,7 +35,7 @@ Basic information about this cute `r animal_subset$species`:
 
 # Directly from: https://bookdown.org/yihui/rmarkdown/params-knit.html
 
-render_report = function(species) {
+render_animal_report = function(species) {
   rmarkdown::render(
     input = "animals.Rmd", # What's the input file to render?
     params = list(species = species), # What are the parameters?
