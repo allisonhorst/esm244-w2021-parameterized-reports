@@ -1,13 +1,11 @@
 ---
-title: "US salmon imports from `r params$country`"
-author: "Allison Horst"
-date: "2/22/2021"
+title: "US salmon imports from `r params$import_country`"
 output: html_document
 params:
-  country: country
+  import_country: Chile
 ---
 
-### Summary: US atlantic salmon imports from `r params$country`
+### Summary: US atlantic salmon imports from `r params$import_country`
 
 Data: US Department of Agriculture Economic Research Service. *Aquaculture data: Aquaculture Trade - All years and all countries.* 2019. https://www.ers.usda.gov/data-products/aquaculture-data.aspx
 
@@ -15,53 +13,24 @@ Data: US Department of Agriculture Economic Research Service. *Aquaculture data:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 
-# Clean up salmon & keep the four countries with top total imports in total for the years reported (Chile, Canada, Norway, United Kingdom)
+# Note: Allison already cleaned up salmon data raw & kept the four countries with top total imports in total for the years reported (Chile, Canada, Norway, United Kingdom). These exist in `salmon_clean.csv`.
 ```
-
-```{r, eval = FALSE}
-# Extra for records: how data were prepared (from raw data)
-
-# salmon <- read_csv("us_atl_salmon_imports.csv", skip = 1) %>% 
-#   pivot_longer(cols = c('1989':'2017'), 
-#                names_to = "year",
-#                values_to = "imported") %>% 
-#   mutate(year = as.numeric(year)) %>% 
-#   filter(Country %in% c("Chile", "Canada", "Norway", "United Kingdom"))
-# 
-# write_csv(salmon, "salmon_clean.csv")
-```
-
 
 ```{r, echo = FALSE}
 salmon_imports <- read_csv("salmon_clean.csv")
 
 country_data <- salmon_imports %>% 
-  filter(Country == params$country)
+  filter(Country == params$import_country)
 
 ggplot(data = country_data, aes(x = year, y = imported)) +
   geom_line()
 
 # Try it out! Run in Console:
 # rmarkdown::render(input = "salmon.Rmd", params = list(country = "Country Name"), output_file = "output_file_name.html")
-```
 
-```{r, echo = FALSE}
-# Or make a function: 
-render_salmon_report = function(country) {
-  rmarkdown::render(
-    input = "salmon.Rmd", # What's the input file to render?
-    params = list(country = country), # What are the parameters?
-    output_file = paste0(country, "_report", ".html") # What should I name the output file?
-  )
-}
+# Then, try rendering with the render_salmon_report() function (you need to have run the code in render_functions.R to make the function available in your working session)!
 
-# A for loop to run them all: 
-
-country_name <- unique(salmon_imports$Country)
-
-for (country in country_name) {
-    render_salmon_report(country)
-}
+# THEN, try running a for loop that contains that function to auto-render reports for all of the countries. Yay automation!
 ```
 
 

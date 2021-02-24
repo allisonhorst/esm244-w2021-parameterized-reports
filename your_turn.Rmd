@@ -5,12 +5,13 @@ output: html_document
 ---
 
 ### Your job: create a parameterized report using data from `penguins.csv`. 
-
 - Your report should contain a ggplot graph of flipper length versus body mass for the **species** that you choose.
 
-- Create a function that will render the report for the species you pick, saved as an .html with format 'penguin_report_SPECIESNAME.html'. 
+- In the `render_functions.R` script, create a function that will render the report for the species you pick, saved as an .html with format 'penguin_report_SPECIESNAME.html'. 
 
-- Create a function that will automatically render a separate report for *all species* in the data. 
+- In the `render_functions.R` script, write a for loop that will automatically render a separate report for *all species* in the data. 
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

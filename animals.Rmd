@@ -1,8 +1,8 @@
 ---
-title: "Summary report for the `r params$species`"
+title: "Summary report for the `r params$pick_species`"
 output: html_document
 params:
-  species: bear
+  pick_species: bear
   
 ---
 
@@ -15,34 +15,18 @@ animals <- read_csv("animals.csv")
 
 ```{r, echo = FALSE}
 animal_subset <- animals %>% 
-  filter(species == params$species)
+  filter(species == params$pick_species)
 ```
 
-Basic information about this cute `r animal_subset$species`: 
+Basic information about this cute `r params$pick_species`: 
 
 - Age: `r animal_subset$age` years
 - Diet: `r animal_subset$diet`
 - Color: `r animal_subset$color`
 
+```{r, eval = FALSE}
+# Try it out! Run in Console:
+# rmarkdown::render(input = "animals.Rmd", params = list(pick_species = "species name"), output_file = "output_file_name.html")
 
-```{r, include = FALSE}
-
-# Want to render a report for just one species? Try in Console:
-# rmarkdown::render(input = "animals.Rmd", params = list(species = "marmot"), output_file = "marmot.html")
-
-
-# Here, we make a function to render our report *and* save a report with the name of the species in the file name!
-
-# Directly from: https://bookdown.org/yihui/rmarkdown/params-knit.html
-
-render_animal_report = function(species) {
-  rmarkdown::render(
-    input = "animals.Rmd", # What's the input file to render?
-    params = list(species = species), # What are the parameters?
-    output_file = paste0(species, "_report", ".html") # What should I name the output file?
-  )
-}
-
-# Then if we run render_report(species = "pika") in the Console, we'll make a parameterized report for pika! 
+# Then, try rendering with the render_animal_report() function (you need to have run the code in render_functions.R to make the function available in your working session)!
 ```
-
