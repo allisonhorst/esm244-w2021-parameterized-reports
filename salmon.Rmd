@@ -26,7 +26,7 @@ ggplot(data = country_data, aes(x = year, y = imported)) +
   geom_line()
 
 # Try it out! Run in Console:
-# rmarkdown::render(input = "salmon.Rmd", params = list(country = "Country Name"), output_file = "output_file_name.html")
+# rmarkdown::render(input = "salmon.Rmd", params = list(import_country = "Country Name"), output_file = "output_file_name.html")
 
 # Then, try rendering with the render_salmon_report() function (you need to have run the code in render_functions.R to make the function available in your working session)!
 
